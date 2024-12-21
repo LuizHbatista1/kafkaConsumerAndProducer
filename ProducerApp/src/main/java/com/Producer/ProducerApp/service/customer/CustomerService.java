@@ -1,4 +1,4 @@
-package com.Producer.ProducerApp.service;
+package com.Producer.ProducerApp.service.customer;
 
 import com.Producer.ProducerApp.DTOS.CustomerDTO;
 import com.Producer.ProducerApp.domain.Customer;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.Random;
 
 @Service
-public class CustomerService {
+public class CustomerService implements CustomerServiceInterface {
 
     private final CustomerRepository customerRepository;
 
@@ -18,12 +18,14 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
+    @Override
     public Customer findCustomerById(Long id){
 
         return this.customerRepository.findById(id).orElseThrow(RuntimeException::new);
 
     }
 
+    @Override
     public Customer createAndSaveCustomer(CustomerDTO customerDTO){
 
         Customer newCustomer = new Customer(customerDTO);
@@ -35,6 +37,7 @@ public class CustomerService {
 
     }
 
+    @Override
     public Integer generateRandomScore(){
 
         Random random = new Random();

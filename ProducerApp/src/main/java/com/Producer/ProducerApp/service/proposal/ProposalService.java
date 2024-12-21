@@ -1,14 +1,15 @@
-package com.Producer.ProducerApp.service;
+package com.Producer.ProducerApp.service.proposal;
 
 import com.Producer.ProducerApp.DTOS.ProposalDTO;
 import com.Producer.ProducerApp.domain.Customer;
 import com.Producer.ProducerApp.domain.Proposal;
 import com.Producer.ProducerApp.repository.ProposalRepository;
+import com.Producer.ProducerApp.service.customer.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ProposalService {
+public class ProposalService implements ProposalServiceInterface {
 
     private final ProposalRepository proposalRepository;
     private final CustomerService customerService;
@@ -20,6 +21,7 @@ public class ProposalService {
     }
 
 
+    @Override
     public Proposal createAndSaveProposal(ProposalDTO proposalDTO){
 
         Customer customer = customerService.findCustomerById(proposalDTO.customerId());

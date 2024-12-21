@@ -2,9 +2,8 @@ package com.Producer.ProducerApp.controller;
 
 import com.Producer.ProducerApp.DTOS.ProposalDTO;
 import com.Producer.ProducerApp.domain.Proposal;
-import com.Producer.ProducerApp.service.ProposalService;
+import com.Producer.ProducerApp.service.proposal.ProposalService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.Repository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,7 +26,7 @@ public class ProposalController {
     public ResponseEntity<Proposal>createProposal(@RequestBody ProposalDTO proposalDTO){
 
         Proposal newProposal = proposalService.createAndSaveProposal(proposalDTO);
-        return new ResponseEntity<>(newProposal , HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).body(newProposal);
 
 
     }
